@@ -48,6 +48,17 @@ Thumbs.db
 
 # Logs
 *.log
+logs/*.log
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Test Files
+test_*.py
+*_test.py
 
 # Environment Variables
 .env

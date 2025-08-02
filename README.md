@@ -1,33 +1,23 @@
 # Maybank PDF Statement Parser
 
-🏦 **Beginner-Friendly** Python application to automatically extract and organize transaction data from your Maybank credit card PDF statements into easy-to-read spreadsheets.
+Python application to extract and organize transaction data from Maybank credit card PDF statements into structured spreadsheets.
 
-> **Perfect for beginners!** No programming experience required - just follow the simple steps below.
+## Quick Start
 
-## 🚀 Quick Start (3 Steps)
+1. Download this project and install Python
+2. Put your PDF statements in a `Drop/` folder
+3. Run the program to generate organized spreadsheets
 
-1. **📥 Download** this project and install Python
-2. **📁 Put your PDF statements** in a `Drop/` folder
-3. **▶️ Run the program** and get your organized spreadsheet!
+## Overview
 
-**Estimated time:** 5-10 minutes for first-time setup, 30 seconds for each use after that.
+This tool processes Maybank credit card PDF statements and converts them into structured data formats. It addresses the challenge of working with PDF statements by:
 
-## 🤔 What Does This Tool Do?
+- Extracting transaction data automatically
+- Converting to CSV and JSON formats
+- Organizing data for analysis and reporting
+- Supporting encrypted PDF files
 
-**The Problem:** Your Maybank credit card statements are PDF files that are hard to work with. You can't easily:
-- Sort transactions by date or amount
-- Calculate totals for specific categories
-- Import data into Excel or Google Sheets
-- Search for specific merchants or transactions
-
-**The Solution:** This tool automatically reads your PDF statements and converts them into a clean, organized spreadsheet where you can:
-- ✅ Sort and filter transactions easily
-- ✅ Calculate monthly spending totals
-- ✅ Track spending by category
-- ✅ Import into any spreadsheet program
-- ✅ Search and analyze your spending patterns
-
-**Perfect for:** Personal budgeting, expense tracking, tax preparation, financial planning
+**Use cases:** Personal budgeting, expense tracking, tax preparation, financial analysis
 
 ## Features
 
@@ -41,102 +31,96 @@
 - **Balance Extraction**: Extract balance information from statements
 - **Transaction Filtering**: Skip non-transaction lines and system messages
 - **Clean Data Output**: Normalized descriptions and proper data formatting
+- **Comprehensive Logging**: Structured logging with multiple levels (DEBUG, INFO, WARNING, ERROR) and file output
 
 ## Requirements
 
-✅ **What you need before starting:**
-- **Python 3.7 or newer** (Don't have Python? [Download here](https://www.python.org/downloads/))
-- **Your Maybank PDF statements** (downloaded from online banking)
-- **5 minutes** to set up
+- Python 3.7 or newer ([Download here](https://www.python.org/downloads/))
+- Maybank PDF statements downloaded from Maybank2u (M2U) online banking
+- Required Python libraries (installed automatically via requirements.txt)
 
-> **Note for beginners:** Don't worry about the technical libraries (PyPDF2, pycryptodome) - they'll be installed automatically!
+### Important: Statement Source
 
-## Installation (Step-by-Step for Beginners)
+**Download statements directly from Maybank2u (M2U) online banking** rather than using statements received via email. Email statements are typically password-protected and may have formatting differences that could affect parsing accuracy. To download from M2U:
+
+1. Log into your Maybank2u account
+2. Navigate to Credit Card > Statements
+3. Select the desired statement period
+4. Download as PDF
+
+This ensures you get the standard format that the parser is optimized for.
+
+## Installation
 
 ### Step 1: Download the Project
-- **Option A:** Click the green "Code" button → "Download ZIP" → Extract the folder
-- **Option B:** If you know Git: `git clone [repository-url]`
+- Download ZIP from the repository and extract
+- Or clone using Git: `git clone [repository-url]`
 
 ### Step 2: Open Terminal/Command Prompt
 - **Mac:** Press `Cmd + Space`, type "Terminal", press Enter
 - **Windows:** Press `Win + R`, type "cmd", press Enter
-- **Navigate to project folder:** `cd path/to/Maybank_app`
+- Navigate to project folder: `cd path/to/Maybank_app`
 
-### Step 3: Set Up Python Environment (Copy & Paste These Commands)
+### Step 3: Set Up Python Environment
 
-**For Mac/Linux users:**
+**For Mac/Linux:**
 ```bash
-# Create a safe space for this project
 python3 -m venv venv
-
-# Activate it
 source venv/bin/activate
-
-# Install required tools automatically
 pip install -r requirements.txt
 ```
 
-**For Windows users:**
+**For Windows:**
 ```cmd
-# Create a safe space for this project
 python -m venv venv
-
-# Activate it
 venv\Scripts\activate
-
-# Install required tools automatically
 pip install -r requirements.txt
 ```
 
-> **Beginner Tip:** Copy and paste each command one by one. You'll see `(venv)` appear in your terminal when successful! 🎉
+The virtual environment will be activated when you see `(venv)` in your terminal prompt.
 
-## How to Use (Super Simple!)
+## Usage
 
-### Step 1: Prepare Your PDF Files 📁
-1. **Download your Maybank statements** from online banking (PDF format)
-2. **Create a folder called `Drop`** in the project directory
-3. **Copy all your PDF files** into the `Drop/` folder
+### Step 1: Prepare Your PDF Files
+1. Download your Maybank statements from M2U online banking (PDF format)
+2. Create a folder called `Drop` in the project directory
+3. Copy all your PDF files into the `Drop/` folder
 
 ```
-Your folder should look like:
+Project structure:
 Maybank_app/
-├── Drop/                    ← Put your PDFs here!
+├── Drop/
 │   ├── statement_jan.pdf
 │   ├── statement_feb.pdf
 │   └── statement_mar.pdf
 └── maybank_parser.py
 ```
 
-### Step 2: Run the Magic! ✨
+### Step 2: Run the Parser
 ```bash
-# Make sure you're in the project folder and virtual environment is active
-# (You should see "(venv)" in your terminal)
-
+# Ensure virtual environment is active (you should see "(venv)" in terminal)
 python maybank_parser.py
 ```
 
-### Step 3: Get Your Results! 📊
-The program will create two files with all your transactions:
-- **`maybank_transactions.csv`** ← Open with Excel/Google Sheets
-- **`maybank_transactions.json`** ← For advanced users
+### Step 3: Review Results
+The program creates two output files:
+- `maybank_transactions.csv` - Spreadsheet format for Excel/Google Sheets
+- `maybank_transactions.json` - JSON format for data processing
 
-### 🎯 How to Know It Worked
-You'll see messages like:
+### Expected Output
 ```
-Processing: statement_jan.pdf ✓
-Processing: statement_feb.pdf ✓
+Processing: statement_jan.pdf
+Processing: statement_feb.pdf
 Processed 3 files successfully.
 Total transactions extracted: 45
-Saved to maybank_transactions.csv ✓
+Transactions saved to maybank_transactions.csv
 ```
 
-> **That's it!** Your messy PDF statements are now organized in a clean spreadsheet! 🎉
-
-### 📊 What You Get
-- **Clean spreadsheet** with all your transactions
-- **Organized columns:** Date, Description, Amount, Type (Credit/Debit)
-- **Ready to use** in Excel, Google Sheets, or any spreadsheet program
-- **No more manual typing** or copy-pasting from PDFs!
+### Output Features
+- Structured transaction data with standardized columns
+- Date, Description, Amount, and Transaction Type fields
+- Compatible with spreadsheet applications
+- Ready for financial analysis and reporting
 
 ## Output Format
 
@@ -152,23 +136,86 @@ The parser extracts the following information for each transaction:
 - **source_file**: Source PDF filename
 - **pattern_used**: Which regex pattern matched
 
-## 📁 Project Structure (What Each File Does)
+## Logging
+
+The parser includes comprehensive logging functionality to help monitor processing and troubleshoot issues.
+
+### Log Levels
+
+- **DEBUG**: Detailed information for debugging (file processing, regex matches)
+- **INFO**: General information about processing progress (default level)
+- **WARNING**: Important notices (missing data, validation issues)
+- **ERROR**: Error conditions that don't stop execution
+
+### Log Configuration
+
+Logs are automatically saved to `logs/maybank_parser.log` and displayed in the console. The log file includes:
+- Timestamps for all events
+- Processing status for each PDF file
+- Transaction extraction details
+- Validation results
+- Error messages and warnings
+
+### Using Different Log Levels
+
+```python
+from maybank_parser import MaybankStatementParser
+
+# Default INFO level
+parser = MaybankStatementParser()
+
+# Debug level (verbose)
+parser = MaybankStatementParser(log_level="DEBUG")
+
+# Warning level (minimal output)
+parser = MaybankStatementParser(log_level="WARNING")
+```
+
+### Example Usage
+
+See `example_usage.py` for demonstrations of different logging levels:
+
+```bash
+python example_usage.py
+```
+
+### Log Management
+
+Use the included log viewer utility to easily check logs:
+
+```bash
+# View last 50 lines (default)
+python view_logs.py
+
+# View last 100 lines
+python view_logs.py 100
+
+# View all logs
+python view_logs.py all
+
+# Clear log file
+python view_logs.py clear
+```
+
+## Project Structure
 
 ```
 Maybank_app/
-├── Drop/                     # 📁 Put your PDF statements here
-│   ├── statement1.pdf        # 📄 Your Maybank PDF files
+├── Drop/                     # PDF statements directory
+│   ├── statement1.pdf        # Maybank PDF files
 │   ├── statement2.pdf
 │   └── ...
-├── venv/                    # 🔧 Python tools (auto-created)
-├── maybank_parser.py        # 🤖 The magic program ⭐
-├── requirements.txt         # 📋 List of needed tools
-├── README.md               # 📖 This instruction file
-├── maybank_transactions.csv # 📊 Your results (spreadsheet)
-└── maybank_transactions.json # 📊 Your results (data format)
+├── logs/                    # Log files directory
+│   └── maybank_parser.log   # Application logs
+├── venv/                    # Python virtual environment
+├── maybank_parser.py        # Main parser script
+├── example_usage.py         # Example usage with different log levels
+├── view_logs.py             # Log viewer utility
+├── requirements.txt         # Python dependencies
+├── README.md               # Documentation
+├── maybank_transactions.csv # Output: CSV format
+└── maybank_transactions.json # Output: JSON format
 ```
-
-> **Beginner note:** You only need to worry about the `Drop/` folder and the output files. Everything else is handled automatically!
 
 ## Improvements Made
 
@@ -224,61 +271,48 @@ Credit amount: RM X,XXX.XX
 Debit amount: RM X,XXX.XX
 ```
 
-## Troubleshooting (Common Beginner Issues)
+## Troubleshooting
 
-### 🚨 **"Command not found" or "Python not recognized"**
-- **Solution:** Install Python from [python.org](https://www.python.org/downloads/)
-- **Windows users:** Make sure to check "Add Python to PATH" during installation
+### "Command not found" or "Python not recognized"
+- Install Python from [python.org](https://www.python.org/downloads/)
+- Windows: Ensure "Add Python to PATH" is checked during installation
 
-### 🚨 **"No such file or directory"**
-- **Solution:** Make sure you're in the right folder. Use `ls` (Mac/Linux) or `dir` (Windows) to see files
-- **Quick fix:** `cd path/to/Maybank_app`
+### "No such file or directory"
+- Verify you're in the correct directory
+- Use `ls` (Mac/Linux) or `dir` (Windows) to list files
+- Navigate to project folder: `cd path/to/Maybank_app`
 
-### 🚨 **"No transactions extracted"**
-- **Check:** Are your PDFs in the `Drop/` folder?
-- **Check:** Are they actual Maybank credit card statements?
-- **Try:** Open one PDF manually to make sure it contains transaction data
+### "No transactions extracted"
+- Confirm PDFs are in the `Drop/` folder
+- Verify files are Maybank credit card statements
+- Test with a single PDF file first
+- Check that PDFs contain readable transaction data
 
-### 🚨 **"PyCryptodome is required"**
-- **Solution:** Your PDF is password-protected. The program will handle this automatically!
-- **If it fails:** Try `pip install pycryptodome` manually
+### "PyCryptodome is required"
+- Indicates password-protected PDF files
+- Install manually if needed: `pip install pycryptodome`
+- Consider using M2U downloaded statements instead
 
-### 🚨 **"Permission denied"**
-- **Solution:** Close any Excel files that might be using the output files
-- **Or:** Run terminal as administrator (Windows) or use `sudo` (Mac/Linux)
+### "Permission denied"
+- Close any applications using the output files
+- Run terminal as administrator (Windows) or with appropriate permissions
 
-### 🆘 **Still stuck?**
-1. **Double-check:** Python is installed (`python --version`)
-2. **Make sure:** You're in the project folder (`ls` should show `maybank_parser.py`)
-3. **Verify:** Virtual environment is active (you see `(venv)` in terminal)
-4. **Try:** Restart terminal and repeat Step 3 from installation
+### General Troubleshooting Steps
+1. Verify Python installation: `python --version`
+2. Confirm you're in the project directory (should contain `maybank_parser.py`)
+3. Check virtual environment is active (look for `(venv)` in terminal)
+4. Reinstall dependencies: `pip install -r requirements.txt`
 
-> **Beginner-friendly tip:** Most issues are solved by carefully following the installation steps again!
+## Security and Safety
 
-## 💪 Confidence Boosters for Beginners
+This tool operates locally on your computer and:
+- Only reads PDF files from the specified directory
+- Creates output files locally
+- Does not modify original PDF statements
+- Does not access external networks or bank accounts
+- Does not transmit data anywhere
 
-### "I'm not technical - can I really do this?"
-**YES!** This tool is designed for non-programmers. Thousands of people with zero coding experience use tools like this successfully. You're just following step-by-step instructions - like following a recipe!
-
-### "What if I break something?"
-**Don't worry!** This tool only *reads* your PDF files and *creates* new spreadsheet files. It cannot:
-- ❌ Modify your original PDF statements
-- ❌ Access your bank account
-- ❌ Send data anywhere online
-- ❌ Damage your computer
-
-### "What if it doesn't work?"
-**No problem!** The worst that can happen is you get an error message. Your files are safe, and you can always:
-- Try the troubleshooting steps above
-- Start over with a fresh download
-- Use just one PDF file to test first
-
-### 🎉 Success Stories
-*"I had 2 years of statements to organize. This saved me literally days of manual work!"*
-
-*"I'm 65 and not tech-savvy, but I got this working in 10 minutes. Game changer for my budgeting!"*
-
-*"Finally I can track my spending properly. Wish I found this tool years ago!"*
+Your financial data remains secure on your local machine.
 
 ## License
 
