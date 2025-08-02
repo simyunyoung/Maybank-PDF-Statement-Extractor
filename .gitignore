@@ -1,0 +1,65 @@
+# Virtual Environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Sensitive Data Files
+# Exclude actual transaction data and PDF statements
+Drop/
+*.pdf
+maybank_transactions.csv
+maybank_transactions.json
+maybank_transactions_final.csv
+maybank_transactions_final.json
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary Files
+*.tmp
+*.temp
+
+# Backup Files
+*.bak
+*.backup
