@@ -1,37 +1,54 @@
 # Maybank PDF Statement Parser
 
-Python application to extract and organize transaction data from Maybank credit card PDF statements into structured spreadsheets.
+Python application to extract and organize transaction data from **Maybank Credit Card and Current Account PDF statements** into structured spreadsheets.
 
 ## Quick Start
 
 1. Download this project and install Python
 2. Put your PDF statements in a `Drop/` folder
-3. Run the program to generate organized spreadsheets
+3. Run the program and select your statement type
+4. Get organized CSV and JSON files automatically
 
 ## Overview
 
-This tool processes Maybank credit card PDF statements and converts them into structured data formats. It addresses the challenge of working with PDF statements by:
+This tool processes **both Maybank Credit Card and Current Account PDF statements** and converts them into structured data formats. It addresses the challenge of working with PDF statements by:
 
-- Extracting transaction data automatically
-- Converting to CSV and JSON formats
-- Organizing data for analysis and reporting
-- Supporting encrypted PDF files
+- 🔍 **Auto-detecting** statement types (Credit Card vs Current Account)
+- 📊 Extracting transaction data automatically
+- 💾 Converting to CSV and JSON formats
+- 📈 Organizing data for analysis and reporting
+- 🔒 Supporting encrypted PDF files
+- ⚠️ Warning about unexpected formats
 
-**Use cases:** Personal budgeting, expense tracking, tax preparation, financial analysis
+**Use cases:** Personal budgeting, expense tracking, tax preparation, financial analysis, account reconciliation
 
 ## Features
 
+### 🏦 Statement Type Support
+- **Credit Card Statements**: Full support for Maybank credit card PDF statements
+- **Current Account Statements**: Complete support for Maybank current account PDF statements
+- **Manual Selection**: Choose specific statement type based on your PDFs
+- **Format Validation**: Warns about unexpected or unsupported formats
+
+### 📊 Data Processing
 - **Optimized PDF Processing**: Extract transaction data from Maybank PDF statements with improved efficiency
 - **Enhanced Transaction Parsing**: Parse transaction details including posting date, transaction date, description, amount, and type (DEBIT/CREDIT)
 - **Smart Date Handling**: Automatically infer correct year for DD/MM date format
 - **Duplicate Prevention**: Advanced duplicate detection using unique transaction identifiers
-- **Encrypted PDF Support**: Handle password-protected and encrypted PDFs
-- **Multiple Export Formats**: Export data to both CSV and JSON formats
-- **Robust Error Handling**: Comprehensive error handling and informative logging
 - **Balance Extraction**: Extract balance information from statements
 - **Transaction Filtering**: Skip non-transaction lines and system messages
 - **Clean Data Output**: Normalized descriptions and proper data formatting
-- **Comprehensive Logging**: Structured logging with multiple levels (DEBUG, INFO, WARNING, ERROR) and file output
+
+### 💾 Export & Security
+- **Multiple Export Formats**: Export data to both CSV and JSON formats
+- **Encrypted PDF Support**: Handle password-protected and encrypted PDFs
+- **Batch Processing**: Process multiple PDF files in one run
+
+### 🔧 User Experience
+- **Interactive Interface**: User-friendly prompts for statement type selection
+- **Robust Error Handling**: Comprehensive error handling and informative feedback
+- **Progress Feedback**: Clear status updates and processing summaries
+- **Troubleshooting Tips**: Helpful guidance when issues occur
 
 ## Requirements
 
@@ -41,14 +58,22 @@ This tool processes Maybank credit card PDF statements and converts them into st
 
 ### Important: Statement Source
 
-**Download statements directly from Maybank2u (M2U) online banking** rather than using statements received via email. Email statements are typically password-protected and may have formatting differences that could affect parsing accuracy. To download from M2U:
+**Download statements directly from Maybank2u (M2U) online banking** rather than using statements received via email. Email statements are typically password-protected and may have formatting differences that could affect parsing accuracy.
 
+**For Credit Card Statements:**
 1. Log into your Maybank2u account
 2. Navigate to Credit Card > Statements
 3. Select the desired statement period
 4. Download as PDF
 
-This ensures you get the standard format that the parser is optimized for.
+**For Current Account Statements:**
+1. Log into your Maybank2u account
+2. Navigate to Accounts > Account Statement
+3. Select your current account
+4. Choose the desired statement period
+5. Download as PDF
+
+This ensures you get the standard format that the parser is optimized for both statement types.
 
 ## Installation
 
@@ -83,6 +108,8 @@ The virtual environment will be activated when you see `(venv)` in your terminal
 
 ### Step 1: Prepare Your PDF Files
 1. Download your Maybank statements from M2U online banking (PDF format)
+   - Credit Card statements from Credit Card > Statements
+   - Current Account statements from Accounts > Account Statement
 2. Create a folder called `Drop` in the project directory
 3. Copy all your PDF files into the `Drop/` folder
 
@@ -90,9 +117,10 @@ The virtual environment will be activated when you see `(venv)` in your terminal
 Project structure:
 Maybank_app/
 ├── Drop/
-│   ├── statement_jan.pdf
-│   ├── statement_feb.pdf
-│   └── statement_mar.pdf
+│   ├── cc_statement_jan.pdf      # Credit Card
+│   ├── ca_statement_jan.pdf      # Current Account
+│   ├── cc_statement_feb.pdf      # Credit Card
+│   └── ca_statement_feb.pdf      # Current Account
 └── maybank_parser.py
 ```
 
@@ -102,25 +130,65 @@ Maybank_app/
 python maybank_parser.py
 ```
 
-### Step 3: Review Results
+### Step 3: Select Statement Type
+The program will prompt you to choose:
+
+```
+🏦 MAYBANK PDF STATEMENT PARSER
+============================================================
+
+Please select the type of Maybank statement to process:
+
+1. 💳 Credit Card Statement
+2. 🏛️  Current Account Statement
+
+------------------------------------------------------------
+Enter your choice (1-2): 1
+
+✅ Selected: Credit Card Statement
+```
+
+**Note:** Choose the statement type that matches your PDF files in the Drop folder.
+
+### Step 4: Review Results
 The program creates two output files:
 - `maybank_transactions.csv` - Spreadsheet format for Excel/Google Sheets
 - `maybank_transactions.json` - JSON format for data processing
 
 ### Expected Output
 ```
-Processing: statement_jan.pdf
-Processing: statement_feb.pdf
-Processed 3 files successfully.
-Total transactions extracted: 45
-Transactions saved to maybank_transactions.csv
+============================================================
+🚀 Starting Maybank PDF Statement Parser...
+📁 Processing PDFs from: ./Drop/
+
+⚠️  Note: Unexpected formats will trigger warnings
+------------------------------------------------------------
+
+📄 Processing: cc_statement_jan.pdf
+📄 Processing: cc_statement_feb.pdf
+📄 Processing: cc_statement_mar.pdf
+
+============================================================
+📊 PROCESSING SUMMARY
+============================================================
+
+✅ Processed 3 files successfully
+📊 Total transactions extracted: 67
+💳 Credit Card transactions: 34
+🏛️  Current Account transactions: 33
+
+============================================================
+✅ Processing completed successfully!
+📄 Files saved: maybank_transactions.csv, maybank_transactions.json
+============================================================
 ```
 
 ### Output Features
-- Structured transaction data with standardized columns
-- Date, Description, Amount, and Transaction Type fields
-- Compatible with spreadsheet applications
-- Ready for financial analysis and reporting
+- **Unified Format**: Both statement types use the same output structure
+- **Statement Type Column**: Identifies whether each transaction is from Credit Card or Current Account
+- **Standardized Columns**: Date, Description, Amount, Transaction Type, and Statement Type
+- **Excel Compatible**: Ready to import into Excel, Google Sheets, or other tools
+- **JSON Format**: Perfect for data analysis, APIs, and programming applications
 
 ## Output Format
 
@@ -136,66 +204,7 @@ The parser extracts the following information for each transaction:
 - **source_file**: Source PDF filename
 - **pattern_used**: Which regex pattern matched
 
-## Logging
 
-The parser includes comprehensive logging functionality to help monitor processing and troubleshoot issues.
-
-### Log Levels
-
-- **DEBUG**: Detailed information for debugging (file processing, regex matches)
-- **INFO**: General information about processing progress (default level)
-- **WARNING**: Important notices (missing data, validation issues)
-- **ERROR**: Error conditions that don't stop execution
-
-### Log Configuration
-
-Logs are automatically saved to `logs/maybank_parser.log` and displayed in the console. The log file includes:
-- Timestamps for all events
-- Processing status for each PDF file
-- Transaction extraction details
-- Validation results
-- Error messages and warnings
-
-### Using Different Log Levels
-
-```python
-from maybank_parser import MaybankStatementParser
-
-# Default INFO level
-parser = MaybankStatementParser()
-
-# Debug level (verbose)
-parser = MaybankStatementParser(log_level="DEBUG")
-
-# Warning level (minimal output)
-parser = MaybankStatementParser(log_level="WARNING")
-```
-
-### Example Usage
-
-See `example_usage.py` for demonstrations of different logging levels:
-
-```bash
-python example_usage.py
-```
-
-### Log Management
-
-Use the included log viewer utility to easily check logs:
-
-```bash
-# View last 50 lines (default)
-python view_logs.py
-
-# View last 100 lines
-python view_logs.py 100
-
-# View all logs
-python view_logs.py all
-
-# Clear log file
-python view_logs.py clear
-```
 
 ## Project Structure
 
@@ -205,12 +214,8 @@ Maybank_app/
 │   ├── statement1.pdf        # Maybank PDF files
 │   ├── statement2.pdf
 │   └── ...
-├── logs/                    # Log files directory
-│   └── maybank_parser.log   # Application logs
 ├── venv/                    # Python virtual environment
 ├── maybank_parser.py        # Main parser script
-├── example_usage.py         # Example usage with different log levels
-├── view_logs.py             # Log viewer utility
 ├── requirements.txt         # Python dependencies
 ├── README.md               # Documentation
 ├── maybank_transactions.csv # Output: CSV format

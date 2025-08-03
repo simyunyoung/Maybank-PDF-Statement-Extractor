@@ -46,9 +46,7 @@ maybank_transactions_final.json
 ehthumbs.db
 Thumbs.db
 
-# Logs
-*.log
-logs/*.log
+
 
 # Temporary Files
 *.tmp
